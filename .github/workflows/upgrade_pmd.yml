@@ -16,7 +16,7 @@ jobs:
     - name: install bsdtar
       run: |
         sudo apt update
-        sudo apt install -y bsdtar
+        sudo apt install -y libarchive-tools
     - name: run pmd upgrade script
       run: |
         source bin/update.sh
