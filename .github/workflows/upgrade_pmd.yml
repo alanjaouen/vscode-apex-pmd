@@ -14,7 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: install bsdtar
-      run: sudo apt-get install -y bsdtar
+      run: |
+        sudo apt update
+        sudo apt install -y bsdtar
     - name: run pmd upgrade script
       run: |
         source bin/update.sh
