@@ -14,7 +14,7 @@ jobs:
     - name: run pmd upgrade script
       run: |
         echo "running pmd upgrade script"
-        set +x
+        set -x
         cd bin
         source update.sh
     - name: commit changes
