@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: run pmd upgrade script
       run: |
+        echo "running pmd upgrade script"
         set +x
         cd bin
         source update.sh
