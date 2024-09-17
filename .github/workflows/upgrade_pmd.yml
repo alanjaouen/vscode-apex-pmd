@@ -14,7 +14,8 @@ jobs:
     - name: run pmd upgrade script
       run: |
         set +x
-        source ./bin/update.sh
+        cd bin
+        source update.sh
     - name: commit changes
       run: |
         # configure git
