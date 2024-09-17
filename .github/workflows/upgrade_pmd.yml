@@ -13,6 +13,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: run pmd upgrade script
       run: |
+        set +x
         source ./bin/update.sh
     - name: commit changes
       run: |
@@ -29,3 +30,6 @@ jobs:
 
         # push changes
         git push origin chore/upgrade-pmd-${VERSION}
+
+        # create a pull request
+        gh pr create --title "upgrade pmd binaries and rulesets to ${VERSION}" --body "upgrade pmd binaries and rulesets to ${VERSION}" --base main --head chore/upgrade-pmd-${VERSION}
