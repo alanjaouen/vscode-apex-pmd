@@ -13,12 +13,11 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
     - uses: actions/checkout@v4
+    - name: install bsdtar
+      run: sudo apt-get install -y bsdtar
     - name: run pmd upgrade script
       run: |
-        echo "running pmd upgrade script"
-        set -x
-        cd bin
-        source update.sh
+        source bin/update.sh
     - name: commit changes
       run: |
         # configure git
