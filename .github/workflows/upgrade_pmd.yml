@@ -1,0 +1,31 @@
+name: update pmd binaries and rulesets to latest
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: run pmd upgrade script
+      run: |
+        source ./bin/update.sh
+    - name: commit changes
+      run: |
+        # configure git
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+        # create a new branch
+        git checkout -b chore/upgrade-pmd-${VERSION}
+        
+        # commit changes
+        git add .
+        git commit -m "upgrade pmd binaries and rulesets to ${VERSION}"
+
+        # push changes
+        git push origin chore/upgrade-pmd-${VERSION}
