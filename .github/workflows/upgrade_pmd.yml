@@ -7,7 +7,9 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  run:
+    name: upgrade pmd binaries and rulesets
+    permissions: write-all
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
