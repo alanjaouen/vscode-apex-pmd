@@ -22,6 +22,9 @@ jobs:
     - name: run pmd upgrade script
       run: |
         source bin/update.sh
+        
+        # make version available to next steps
+        echo "VERSION=${VERSION}" >> "$GITHUB_OUTPUT"
     - name: commit changes
       run: |
         # configure git
@@ -36,7 +39,7 @@ jobs:
         git commit -m "upgrade pmd binaries and rulesets to ${VERSION}"
 
         # push changes
-        git push origin chore/upgrade-pmd-${VERSION}
+        git push --force origin chore/upgrade-pmd-${VERSION}
 
         # create a pull request
         gh pr create --title "upgrade pmd binaries and rulesets to ${VERSION}" --body "upgrade pmd binaries and rulesets to ${VERSION}" --base main --head chore/upgrade-pmd-${VERSION}
