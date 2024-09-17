@@ -20,12 +20,15 @@ jobs:
         sudo apt update
         sudo apt install -y libarchive-tools
     - name: run pmd upgrade script
+      id: update-script
       run: |
         source bin/update.sh
-        
+
         # make version available to next steps
         echo "VERSION=${VERSION}" >> "$GITHUB_OUTPUT"
     - name: commit changes
+      env:
+        VERSION: ${{ steps.update-script.outputs.VERSION }}
       run: |
         # configure git
         git config user.name github-actions
@@ -42,4 +45,4 @@ jobs:
         git push --force origin chore/upgrade-pmd-${VERSION}
 
         # create a pull request
-        gh pr create --title "upgrade pmd binaries and rulesets to ${VERSION}" --body "upgrade pmd binaries and rulesets to ${VERSION}" --base main --head chore/upgrade-pmd-${VERSION}
+        gh pr create --title "upgrade pmd binaries and rulesets to ${VERSION}" --body "upgrade pmd binaries and rulesets to ${VERSION}" --base master --head chore/upgrade-pmd-${VERSION}
